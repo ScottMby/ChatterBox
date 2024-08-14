@@ -26,7 +26,8 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7078;http://localhost:5147",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "GOOGLE_APPLICATION_CREDENTIALS": "firebase-config.json"
       }
     },
     "IIS Express": {
