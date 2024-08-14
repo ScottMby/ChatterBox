@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication;
 using ChatterBox.Authentication;
 using FirebaseAdmin;
+using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace ChatterBox
 {
@@ -33,11 +35,7 @@ namespace ChatterBox
                 .WriteTo.Console()
                 .CreateLogger();
 
-            var connectionString = builder.Configuration["Db:ConnectionString"];
-
-            builder.Services.AddSingleton(new ConnectionString(connectionString));
-
-
+            builder.Services.AddDbContext<ChatterBoxDbContext>();
             
             var app = builder.Build();
 

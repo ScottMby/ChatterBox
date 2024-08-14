@@ -2,6 +2,7 @@
 {
     public class User
     {
+        public int UserId { get; set; }
         public int FirebaseId { get; set; }
 
         public List<User> Friends { get; set; }
