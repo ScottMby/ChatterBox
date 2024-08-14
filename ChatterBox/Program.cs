@@ -2,6 +2,10 @@
 using ChatterBox.Models;
 using System.Diagnostics;
 using Serilog;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication;
+using ChatterBox.Authentication;
+using FirebaseAdmin;
 
 namespace ChatterBox
 {
@@ -19,6 +23,11 @@ namespace ChatterBox
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddSignalR();
+
+            builder.Services.AddSingleton(FirebaseApp.Create());
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddScheme<AuthenticationSchemeOptions, FirebaseAuthenticationHandler>(JwtBearerDefaults.AuthenticationScheme, (o) => { });
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
