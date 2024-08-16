@@ -364,3 +364,6 @@ FodyWeavers.xsd
 
 # IMPORTANT! IGNORE FIREBASE CONFIG (contains firebase private key)
 /ChatterBox/firebase-config.json
+
+# Also important! Ignore database configuration file that contains database connection string
+/ChatterBox/db-config.json

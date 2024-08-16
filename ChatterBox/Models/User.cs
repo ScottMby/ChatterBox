@@ -2,8 +2,13 @@
 {
     public class User
     {
-        public int firebaseId { get; set; }
+        public int UserId { get; set; }
+        public int FirebaseId { get; set; }
 
         public List<User> Friends { get; set; }
+
+        public List<Message> Messages { get; set; }
+
+        public List<Chat> Chats { get; set; }
     }
 }

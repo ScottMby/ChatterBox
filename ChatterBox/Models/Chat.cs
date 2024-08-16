@@ -1,6 +1,6 @@
 ﻿namespace ChatterBox.Models
 {
-    public class Chats
+    public class Chat
     {
         public int ChatId { get; set; }
         public string ChatName { get; set; }
