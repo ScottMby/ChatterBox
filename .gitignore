@@ -367,3 +367,6 @@ FodyWeavers.xsd
 
 # Also important! Ignore database configuration file that contains database connection string
 /ChatterBox/db-config.json
+*.json
+/.gitignore
+/ChatterBoxTests/ChatterBoxTests.csproj

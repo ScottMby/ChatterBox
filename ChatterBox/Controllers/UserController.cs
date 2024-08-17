@@ -8,16 +8,13 @@ namespace ChatterBox.Controllers
     [Route("user/[controller]")]
     public class UserController : Controller
     {
-        private readonly ILogger<UserController> _logger;
-
-        public UserController(ILogger<UserController> logger)
+        public UserController()
         {
-            _logger = logger;
         }
 
         [HttpPost("register")]
         [Authorize]
-        public async Task Register()
+        public async Task<IActionResult> Register()
         {
             throw new NotImplementedException();
         }

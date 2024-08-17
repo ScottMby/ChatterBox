@@ -11,13 +11,43 @@
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="FluentAssertions" Version="7.0.0-alpha.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="Serilog" Version="4.0.2-dev-02220" />
     <PackageReference Include="xunit" Version="2.5.3" />
+    <PackageReference Include="Xunit.DependencyInjection" Version="9.3.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ChatterBox\ChatterBox.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Scott\source\repos\ChatterBoxProject\ChatterBoxTests\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove=".editorconfig" />
+    <None Remove="UserAuthToken.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Scott\source\repos\ChatterBoxProject\ChatterBoxTests\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Scott\source\repos\ChatterBoxProject\ChatterBoxTests\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="UserAuthToken.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
