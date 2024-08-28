@@ -4,10 +4,11 @@ using System.Diagnostics;
 using Serilog;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication;
-using ChatterBox.Authentication;
 using FirebaseAdmin;
 using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
+using Google.Apis.Auth.OAuth2;
+using FirebaseAdminAuthentication.DependencyInjection.Extensions;
 
 namespace ChatterBox
 {
@@ -16,6 +17,15 @@ namespace ChatterBox
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Configuration.AddJsonFile("firebase-config.json");
+
+            builder.Services.AddSingleton(FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromJson(builder.Configuration.GetValue<string>("FIREBASE_CONFIG"))
+            }));
+            builder.Services.AddFirebaseAuthentication();
+            builder.Services.AddAuthorization();
 
             // Add services to the container.
 
@@ -26,17 +36,12 @@ namespace ChatterBox
 
             builder.Services.AddSignalR();
 
-            builder.Services.AddSingleton(FirebaseApp.Create());
-
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddScheme<AuthenticationSchemeOptions, FirebaseAuthenticationHandler>(JwtBearerDefaults.AuthenticationScheme, (o) => { });
-
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .CreateLogger();
 
             builder.Services.AddDbContext<ChatterBoxDbContext>();
-            
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -46,16 +51,21 @@ namespace ChatterBox
                 app.UseSwaggerUI();
             }
 
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
-
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
 
             app.MapControllers();
 
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+           
             app.Run();
         }
     }

@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace ChatterBox.Controllers
 {
     [ApiController]
-    [Route("user/[controller]")]
+    [Route("[controller]")]
     public class UserController : Controller
     {
         public UserController()
@@ -16,7 +17,7 @@ namespace ChatterBox.Controllers
         [Authorize]
         public async Task<IActionResult> Register()
         {
-            throw new NotImplementedException();
+            return Ok("");
         }
     }
 }
